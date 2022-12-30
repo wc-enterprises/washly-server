@@ -1,7 +1,5 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import * as admin from 'firebase-admin';
-import * as functions from 'firebase-functions';
 
 // admin.initializeApp({
 //   credential: admin.credential.cert({
