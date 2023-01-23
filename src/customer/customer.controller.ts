@@ -44,7 +44,7 @@ export class CustomerController {
   createBooking(@Body() customerBookingData: ICustomerBookingData) {
     //validate mandatory params
     [
-      'pickTimeSlot',
+      'pickUpTimeSlot',
       'pickUpAddress',
       'deliveryAddress',
       'deliveryTimeSlot',
@@ -148,5 +148,14 @@ export class CustomerController {
   @UsePipes(new CreateStoreValidationPipe())
   async createStore(@Body() store: ICreateStore): Promise<any> {
     return this.customerService.createStore(store);
+  }
+
+  @Get('get-stores')
+  async getStores(): Promise<any> {
+    try {
+      return await this.customerService.getStores();
+    } catch (err) {
+      return frameResponse('ERROR', err.message);
+    }
   }
 }

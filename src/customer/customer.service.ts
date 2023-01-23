@@ -171,17 +171,20 @@ export class CustomerService {
     return customer;
   }
 
-  async addAddress(customerId: string, address: any): Promise<void> {
+  async addAddress(customerId: string, address: any): Promise<any> {
     // Get a reference to the customers collection
     const customersRef = this.firestore.collection('customers');
 
     // Get a reference to the customer document
     const customerRef = customersRef.doc(customerId);
 
+    if (!customerRef) return frameResponse('ERROR', `Customer not found.`);
+
     // Update the customer document with the new address
     await customerRef.update({
       addresses: FieldValue.arrayUnion(address),
     });
+    return frameResponse('SUCCESS', `Added address successfully`);
   }
 
   async getAddresses(customerId: string, socket: Socket): Promise<void> {
@@ -232,6 +235,13 @@ export class CustomerService {
     await this.firestore.collection('stores').doc(store.id).set(store);
 
     // Return the store object
-    return store;
+    return frameResponse('SUCCESS', `Created store successfully`, store);
+  }
+
+  async getStores(): Promise<any> {
+    const collection = this.firestore.collection('stores');
+    const snapshot = await collection.get();
+    const stores = snapshot.docs.map((doc) => doc.data());
+    return frameResponse('SUCCESS', `Fetched stores successfully`, stores);
   }
 }

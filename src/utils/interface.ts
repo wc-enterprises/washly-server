@@ -6,7 +6,7 @@ export interface IUpdateBooking {
 }
 
 export interface ICustomerBookingData {
-  pickTimeSlot: string;
+  pickUpTimeSlot: string;
   pickUpAddress: IAddress;
   deliveryAddress: IAddress;
   deliveryTimeSlot: string;
