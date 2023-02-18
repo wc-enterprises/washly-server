@@ -48,9 +48,16 @@ export class CustomerService {
 
     // Create a reference to the store document
     const storeRef = this.firestore.collection('stores').doc(booking.storeId);
+    const customerRef = this.firestore
+      .collection('customers')
+      .doc(booking.customerId);
+
+    if (!storeRef) throw new Error(`Invalid storeId`);
+    if (!customerRef) throw new Error(`Invalid customerId`);
 
     // Add the store reference to the order document
     booking.store = storeRef;
+    booking.customer = customerRef;
 
     // Add the booking document to the bookings collection
     return this.firestore

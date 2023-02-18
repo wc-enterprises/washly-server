@@ -12,7 +12,8 @@ export interface ICustomerBookingData {
   deliveryTimeSlot: string;
   customerId: string;
   storeId: string;
-  service: ISelectedService[];
+  products: IProduct[];
+  deliveryInstructions?: string[];
 }
 
 export interface IBooking extends ICustomerBookingData {
@@ -30,8 +31,9 @@ export interface IBooking extends ICustomerBookingData {
   deliveryTimestamp?: string; // next release
   bill?: IBill;
 
-  //Firebase store ref
+  //Firebase ref
   store?: any;
+  customer?: any;
 }
 
 export interface IAddress {
@@ -45,10 +47,13 @@ export interface IAddress {
   pincode: number;
 }
 
-export interface ISelectedService {
-  name: AvailableServices;
-  numberOfItems: number;
-  weight?: number;
+export interface IProduct {
+  id: string;
+  name: string; // Regular Wash upto 4kg , Detol wash
+  category: string; // WASHING, ADDON , DRY_CLEANING
+  unitPrice: number;
+  unitOfCalculation: string;
+  quantity?: number;
   amount?: number;
 }
 

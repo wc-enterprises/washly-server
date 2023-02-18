@@ -50,7 +50,7 @@ export class CustomerController {
       'deliveryTimeSlot',
       'customerId',
       'storeId',
-      'service',
+      'products',
     ].forEach((item) => {
       const isPresent = Object.keys(customerBookingData).indexOf(item);
       if (isPresent === -1)
