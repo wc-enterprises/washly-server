@@ -62,6 +62,8 @@ export class CustomerService {
     // Add the booking document to the bookings collection
     return this.firestore
       .collection('bookings')
+      .doc(booking.customerId)
+      .collection('user_bookings')
       .doc(booking.id)
       .set(booking)
       .then((data) => {
